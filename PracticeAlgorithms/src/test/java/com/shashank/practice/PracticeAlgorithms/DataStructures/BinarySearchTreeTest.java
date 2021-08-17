@@ -32,15 +32,8 @@ class BinarySearchTreeTest {
 
     @Test
     void insertNodeIterative() {
-
-        DoublyNode root = cut.insertNodeIterative(50);
-        cut.insertNodeIterative(30);
-        cut.insertNodeIterative(20);
-        cut.insertNodeIterative(40);
-        cut.insertNodeIterative(70);
-        cut.insertNodeIterative(60);
-        cut.insertNodeIterative(80);
         cut.Inorder(root);
+        cut.preOrder(root);
     }
 
     @Test

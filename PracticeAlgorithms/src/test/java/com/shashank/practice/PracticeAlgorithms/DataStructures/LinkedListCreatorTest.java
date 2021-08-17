@@ -55,6 +55,14 @@ class LinkedListCRUDTest {
     }
 
     @Test
+    public void testDuplicateRemoval() {
+        List<Integer> dataList = new ArrayList<>(Arrays.asList(1, 1, 3, 4, 4, 4, 5, 6, 6));
+        Node head = cut.addAll(dataList);
+        cut.removeDuplicates(head);
+        cut.show();
+    }
+
+    @Test
     public void testReversePrint() {
         Node head = cut.add(4);
         cut.add(5);
@@ -71,6 +79,14 @@ class LinkedListCRUDTest {
         cut.add(7);
         cut.reverseRecursive(head);
         cut.show();
+    }
+
+    @Test
+    public void testMerge2Lists() {
+        Node head1 = cut.addAll(new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9)));
+        LinkedListCRUD cut2 = new LinkedListCRUD();
+        Node head2 = cut2.addAll(new ArrayList<>(Arrays.asList(2, 4, 6, 8, 10)));
+        Node result = cut.mergeLinkedLists(head1, head2);
     }
 
 }

@@ -16,10 +16,12 @@ public class LinkedListCRUD {
         return head;
     }
 
-    public void addAll(List<Integer> dataList) {
-        for (Integer data : dataList) {
-            add(data);
+    public Node addAll(List<Integer> dataList) {
+        Node head = add(dataList.get(0));
+        for (int i = 1; i < dataList.size(); i++) {
+            add(dataList.get(i));
         }
+        return head;
     }
 
     public void insertAt(int index, int data) {
@@ -46,6 +48,25 @@ public class LinkedListCRUD {
                 nodeAtIndex.next = nodeAtIndex.next.next;
             }
         }
+    }
+
+    public Node removeDuplicates(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node current = head;
+        while (current.next != null) {
+            Node next = current.next;
+            if (current.data == next.data) {
+                while (next != null && current.data == next.data) {
+                    next = next.next;
+                    current.next = next;
+                }
+            } else {
+                current = next;
+            }
+        }
+        return head;
     }
 
     public void reverse() {
@@ -112,26 +133,50 @@ public class LinkedListCRUD {
         System.out.println(node.data);
     }
 
+    public Node mergeLinkedLists(Node headOne, Node headTwo) {
+        Node current1 = headOne;
+        Node current2 = headTwo;
+        Node previous2 = null;
+
+        if (headOne == null) {
+            return headTwo;
+        }
+        if (headTwo == null) {
+            return headOne;
+        }
+
+        while (current1 != null && current2 != null) {
+            if (current1.data > current2.data) {
+                while (current2 != null && current1.data > current2.data) {
+                    previous2 = current2;
+                    current2 = current2.next;
+                }
+                previous2.next = current1;
+                previous2 = current1;
+            } else {
+                if (previous2 == null) {
+                    headTwo = current1;
+                    previous2 = headTwo;
+                } else {
+                    previous2.next = current1;
+                    previous2 = current1;
+                }
+            }
+
+            current1 = current1.next;
+            previous2.next = current2;
+        }
+        if (current1 != null) {
+            previous2.next = current1;
+        }
+        return headTwo;
+    }
+
     private Node createNode(int data, Node next) {
         Node node = new Node();
         node.data = data;
         node.next = next;
         return node;
     }
-
-}
-
-class Node {
-    public Node() {
-
-    }
-
-    public Node(int data, Node next) {
-        this.data = data;
-        this.next = next;
-    }
-
-    public int data;
-    public Node next;
 
 }
